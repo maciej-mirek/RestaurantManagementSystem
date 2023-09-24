@@ -1,4 +1,6 @@
 
+using RestaurantManagementSystem.Infrastructure.Extensions;
+
 namespace RestaurantManagementSystem
 {
     public class Program
@@ -8,11 +10,13 @@ namespace RestaurantManagementSystem
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            
 
             var app = builder.Build();
 

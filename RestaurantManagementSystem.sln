@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManagementSystem.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantManagementSystem.Infrastructure", "RestaurantManagementSystem.Infrastructure\RestaurantManagementSystem.Infrastructure.csproj", "{493F221F-9A38-4DE0-8E09-AD490570C2F1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{79D7B298-0C4A-4A68-A384-0F23AFC27151}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CC9F850-ECA1-407C-B644-4E9C30BFAD04} = {79D7B298-0C4A-4A68-A384-0F23AFC27151}
+		{4CF25383-E56C-4DB2-A260-44988195A840} = {79D7B298-0C4A-4A68-A384-0F23AFC27151}
+		{CE11AC13-75CC-4FFE-A9E1-D9F66B986B82} = {79D7B298-0C4A-4A68-A384-0F23AFC27151}
+		{493F221F-9A38-4DE0-8E09-AD490570C2F1} = {79D7B298-0C4A-4A68-A384-0F23AFC27151}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56ABB341-A15F-4F9F-AAFF-49EDDBB9E963}
