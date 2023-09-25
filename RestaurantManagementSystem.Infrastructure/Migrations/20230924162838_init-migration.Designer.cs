@@ -11,7 +11,7 @@ using RestaurantManagementSystem.Infrastructure.DbContext;
 
 namespace RestaurantManagementSystem.Infrastructure.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230924162838_init-migration")]
     partial class initmigration
     {

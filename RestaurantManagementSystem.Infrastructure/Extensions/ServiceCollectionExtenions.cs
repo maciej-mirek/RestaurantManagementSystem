@@ -15,10 +15,10 @@ namespace RestaurantManagementSystem.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("RestaurantManagementSystem")));
             services.AddIdentityCore<IdentityUser>()
-                .AddEntityFrameworkStores<DatabaseContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
         }
     }
 }
