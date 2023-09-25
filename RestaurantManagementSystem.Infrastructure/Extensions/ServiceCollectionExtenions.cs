@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantManagementSystem.Infrastructure.DbContext;
+using RestaurantManagementSystem.Infrastructure.Seeders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace RestaurantManagementSystem.Infrastructure.Extensions
                 configuration.GetConnectionString("RestaurantManagementSystem")));
             services.AddIdentityCore<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<RestaurantManagementSystemSeeder>();
+
+
         }
     }
 }

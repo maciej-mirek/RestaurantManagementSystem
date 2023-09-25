@@ -1,11 +1,12 @@
 
 using RestaurantManagementSystem.Infrastructure.Extensions;
+using RestaurantManagementSystem.Infrastructure.Seeders;
 
 namespace RestaurantManagementSystem
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,10 @@ namespace RestaurantManagementSystem
             
 
             var app = builder.Build();
+
+            var scope = app.Services.CreateScope();
+            var seeder = scope.ServiceProvider.GetRequiredService<RestaurantManagementSystemSeeder>();
+            await seeder.Seed();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
