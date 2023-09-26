@@ -2,6 +2,7 @@
 using RestaurantManagementSystem.Infrastructure.Extensions;
 using RestaurantManagementSystem.Infrastructure.Seeders;
 using RestaurantManagementSystem.WebAPI.Middleware;
+using Serilog;
 
 namespace RestaurantManagementSystem
 {
@@ -19,7 +20,8 @@ namespace RestaurantManagementSystem
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ExceptionsMiddleware>();
 
-
+            builder.Host.UseSerilog((context, configuration) =>
+                configuration.ReadFrom.Configuration(context.Configuration));
 
             var app = builder.Build();
 
@@ -28,6 +30,7 @@ namespace RestaurantManagementSystem
             await seeder.Seed();
 
             app.UseMiddleware<ExceptionsMiddleware>();
+            app.UseSerilogRequestLogging();
 
 
             // Configure the HTTP request pipeline.
