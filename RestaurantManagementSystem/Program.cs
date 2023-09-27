@@ -7,6 +7,7 @@ using RestaurantManagementSystem.Infrastructure.Seeders;
 using RestaurantManagementSystem.WebAPI.Middleware;
 using Serilog;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace RestaurantManagementSystem
 {
@@ -21,10 +22,13 @@ namespace RestaurantManagementSystem
             builder.Services.AddApplication();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddScoped<ExceptionsMiddleware>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<ExceptionsMiddleware>();
-
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
 
             builder.Services.AddAuthentication(options =>
             {

@@ -22,6 +22,6 @@ namespace RestaurantManagementSystem.Domain.Entities
         public string? AdditionalInfo { get; set; }
         public IdentityUser? User { get; set; }
         public Address? Address { get; set; }
-        public List<Dish> Dishes { get; set; } = new();
+        public List<OrderDishes> OrderDishes { get; set; }
     }
 }

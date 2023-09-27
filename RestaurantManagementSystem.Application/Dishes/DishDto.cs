@@ -5,17 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantManagementSystem.Domain.Entities
+namespace RestaurantManagementSystem.Application.Dishes
 {
-    public class Dish
+    public class DishDto
     {
-        public int DishId { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
         public decimal Price { get; set; }
         public int EstimatedTime { get; set; }
         public bool IsVisible { get; set; }
-        public bool IsArchived { get; set; } = false;
-        public List<OrderDishes> OrderDishes { get; set; }
     }
 }

@@ -58,7 +58,7 @@ namespace RestaurantManagementSystem.Infrastructure.Seeders
                         DeliveryType = DeliveryTypeEnum.ToAdress,
                         PaymentType = PaymentTypeEnum.Online,
                         Address = address,
-                        Dishes = new List<Dish> { dish1, dish2 }
+                      //  Dishes = new List<Dish> { dish1, dish2 }
                     };
 
                     var order2 = new Order
@@ -66,26 +66,26 @@ namespace RestaurantManagementSystem.Infrastructure.Seeders
                         IsPaid = false,
                         TotalPrice = 55.0m,
                         DeliveryPrice = 5.0m,
-                        OrderTime = DateTime.Now.AddHours(-1), 
+                        OrderTime = DateTime.Now.AddHours(-1),
                         DeliveryType = DeliveryTypeEnum.Local,
                         PaymentType = PaymentTypeEnum.OnDelivery,
-                        TableNumber= 1,
+                        TableNumber = 1,
                         Address = address2,
-                        Dishes = new List<Dish> { dish1, dish3 } 
+                       // Dishes = new List<Dish> { dish1, dish3 }
                     };
 
-                    var orderDishes1 = new OrderDishes { OrderId = 1, Order = order, DishId = 1, Dish = dish1 };
-                    var orderDishes2 = new OrderDishes { OrderId = 1, Order = order, DishId = 2, Dish = dish2 };
-                    var orderDishes3 = new OrderDishes { OrderId = 2, Order = order2, DishId = 1, Dish = dish1 };
-                    var orderDishes4 = new OrderDishes { OrderId = 2, Order = order2, DishId = 3, Dish = dish3 };
+                    var orderDishes1 = new OrderDishes { OrderId = 1, Order = order, DishId = 1, Dish = dish1, Quantity = 2 };
+                    var orderDishes2 = new OrderDishes { OrderId = 1, Order = order, DishId = 2, Dish = dish2, Quantity = 1};
+                    var orderDishes3 = new OrderDishes { OrderId = 2, Order = order2, DishId = 1, Dish = dish1, Quantity = 3 };
+                    var orderDishes4 = new OrderDishes { OrderId = 2, Order = order2, DishId = 3, Dish = dish3, Quantity = 1 };
 
-                    await _dbContext.Orders.AddRangeAsync(order,order2);
-                    await _dbContext.OrderDishes.AddRangeAsync(orderDishes1, orderDishes2,orderDishes3,orderDishes4);
+                    await _dbContext.Orders.AddRangeAsync(order, order2);
+                    await _dbContext.OrderDishes.AddRangeAsync(orderDishes1, orderDishes2, orderDishes3, orderDishes4);
 
                     await _dbContext.SaveChangesAsync();
                 }
             }
-           
+
         }
     }
 }

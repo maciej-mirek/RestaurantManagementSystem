@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace RestaurantManagementSystem.WebAPI.Exceptions
+namespace RestaurantManagementSystem.Application.Exceptions
 {
     public class ErrorResponse
     {

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using RestaurantManagementSystem.Application.Exceptions;
 using RestaurantManagementSystem.Application.Users;
 using RestaurantManagementSystem.Domain.Interfaces;
 using System;
@@ -22,6 +23,7 @@ namespace RestaurantManagementSystem.Application.Users.Command.Login
         }
         public async Task<AuthResult> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
+            throw new NotFoundException("a");
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
 
             if (existingUser is null)

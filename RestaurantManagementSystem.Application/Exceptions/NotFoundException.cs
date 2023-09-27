@@ -1,4 +1,4 @@
-﻿namespace RestaurantManagementSystem.WebAPI.Exceptions
+﻿namespace RestaurantManagementSystem.Application.Exceptions
 {
     public class NotFoundException : Exception
     {

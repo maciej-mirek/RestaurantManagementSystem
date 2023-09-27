@@ -1,6 +1,6 @@
 ﻿
 
-using RestaurantManagementSystem.WebAPI.Exceptions;
+using RestaurantManagementSystem.Application.Exceptions;
 
 namespace RestaurantManagementSystem.WebAPI.Middleware
 {
@@ -24,7 +24,7 @@ namespace RestaurantManagementSystem.WebAPI.Middleware
                 await context.Response.WriteAsync(errorResponse.ToString());
 
             }
-            catch 
+            catch (Exception e)
             {
                 context.Response.StatusCode = 500;
                 context.Response.ContentType = "application/json";

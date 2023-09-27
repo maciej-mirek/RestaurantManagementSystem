@@ -9,6 +9,7 @@ using RestaurantManagementSystem.Application.Config;
 using RestaurantManagementSystem.Domain.Interfaces;
 using RestaurantManagementSystem.Infrastructure.Authentication;
 using RestaurantManagementSystem.Infrastructure.DbContext;
+using RestaurantManagementSystem.Infrastructure.Repositories;
 using RestaurantManagementSystem.Infrastructure.Seeders;
 using System;
 using System.Collections.Generic;
@@ -28,10 +29,13 @@ namespace RestaurantManagementSystem.Infrastructure.Extensions
             services.AddIdentityCore<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped<RestaurantManagementSystemSeeder>();
-            services.AddScoped<IJwtProvider,JwtProvider>();
-
+            services.AddScoped<IJwtProvider, JwtProvider>();
             services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+            services.AddScoped<RestaurantManagementSystemSeeder>();
+
+            services.AddScoped<IDishRepository,DishRepository>();
+            services.AddScoped<IOrderRepository,OrderRepository>();
+
 
 
         }

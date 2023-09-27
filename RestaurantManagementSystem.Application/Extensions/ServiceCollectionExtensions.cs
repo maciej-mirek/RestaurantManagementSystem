@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using RestaurantManagementSystem.Application.Mappings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +17,9 @@ namespace RestaurantManagementSystem.Application.Extensions
             var assembly = typeof(ServiceCollectionExtensions).Assembly;
             services.AddMediatR(configuration =>
                 configuration.RegisterServicesFromAssemblies(assembly));
+
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            cfg.AddProfile(new DishMappingProfile())).CreateMapper());
         }
     }
 }

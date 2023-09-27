@@ -23,21 +23,36 @@ namespace RestaurantManagementSystem.Infrastructure.DbContext
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Order>()
-                .HasMany(o => o.Dishes);
-
             builder.Entity<OrderDishes>()
                 .HasKey(od => od.OrderDishesId);
 
             builder.Entity<OrderDishes>()
                 .HasOne(od => od.Order)
-                .WithMany()
+                .WithMany(o => o.OrderDishes)
                 .HasForeignKey(od => od.OrderId);
 
             builder.Entity<OrderDishes>()
                 .HasOne(od => od.Dish)
-                .WithMany()
+                .WithMany(d => d.OrderDishes)
                 .HasForeignKey(od => od.DishId);
+
+
+            //builder.Entity<Order>()
+            //    .HasMany(o => o.Dishes);
+
+            //builder.Entity<OrderDishes>()
+            //    .HasKey(od => od.OrderDishesId);
+
+            //builder.Entity<OrderDishes>()
+            //    .HasOne(od => od.Order)
+            //    .WithMany()
+            //    .HasForeignKey(od => od.OrderId);
+
+            //builder.Entity<OrderDishes>()
+            //    .HasOne(od => od.Dish)
+            //    .WithMany()
+            //    .HasForeignKey(od => od.DishId);
+
         }
     }
 }

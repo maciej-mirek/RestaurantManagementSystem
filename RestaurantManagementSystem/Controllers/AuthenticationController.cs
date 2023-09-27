@@ -1,6 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantManagementSystem.Application.Dishes;
+using RestaurantManagementSystem.Application.Dishes.Commands.CreateDish;
+using RestaurantManagementSystem.Application.Dishes.Queries;
+using RestaurantManagementSystem.Application.Exceptions;
 using RestaurantManagementSystem.Application.Users;
 using RestaurantManagementSystem.Application.Users.Command.Login;
 using RestaurantManagementSystem.Application.Users.Command.Register;
@@ -13,9 +17,14 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public AuthenticationController(IMediator mediator)
+        private readonly IDishRepository _dishRepository;
+        private readonly IOrderRepository _orderRepository;
+        public AuthenticationController(IMediator mediator, IDishRepository dishRepository,
+            IOrderRepository orderRepository)
         {      
             _mediator = mediator;
+            _dishRepository = dishRepository;
+            _orderRepository = orderRepository;
         }
 
         [HttpPost]
@@ -28,6 +37,14 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
         public async Task<IActionResult> Login(UserLoginRequest request)
         {
             return Ok(await _mediator.Send(new LoginCommand() { Email = request.Email, Password = request.Password}));
+        }
+
+
+        [HttpGet("Test")]
+        public async Task<IActionResult> Test()
+        {
+           
+            return Ok(_orderRepository.Get());
         }
     }
 }
