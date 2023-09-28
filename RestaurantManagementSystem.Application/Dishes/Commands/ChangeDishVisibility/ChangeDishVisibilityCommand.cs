@@ -10,5 +10,6 @@ namespace RestaurantManagementSystem.Application.Dishes.Commands.ChangeDishVisib
     public class ChangeDishVisibilityCommand : IRequest
     {
         public int DishId { get; set; }
+        public bool Visibility { get; set; }
     }
 }

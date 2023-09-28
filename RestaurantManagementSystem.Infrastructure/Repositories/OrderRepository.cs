@@ -17,8 +17,23 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
         {
             _dbContext= dbContext;
         }
-        public List<Order> Get() => _dbContext.Orders
-            .Include(o => o.OrderDishes)
+
+        public async Task Create(Order order)
+        {
+
+            foreach(var d in order.Dishes)
+            {
+                var dish = await _dbContext.Dishes.FindAsync(d.DishId);
+                if (dish is null)
+                    throw new Exception();
+            }
+
+            _dbContext.Orders.Add(order);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public List<Order> GetActive() => _dbContext.Orders
+            .Include(o => o.Dishes)
             .ThenInclude(o => o.Dish).ToList();
     }
 }

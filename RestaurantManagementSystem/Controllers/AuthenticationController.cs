@@ -17,14 +17,9 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IDishRepository _dishRepository;
-        private readonly IOrderRepository _orderRepository;
-        public AuthenticationController(IMediator mediator, IDishRepository dishRepository,
-            IOrderRepository orderRepository)
+        public AuthenticationController(IMediator mediator)
         {      
             _mediator = mediator;
-            _dishRepository = dishRepository;
-            _orderRepository = orderRepository;
         }
 
         [HttpPost]
@@ -39,12 +34,5 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
             return Ok(await _mediator.Send(new LoginCommand() { Email = request.Email, Password = request.Password}));
         }
 
-
-        [HttpGet("Test")]
-        public async Task<IActionResult> Test()
-        {
-           
-            return Ok(_orderRepository.Get());
-        }
     }
 }

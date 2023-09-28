@@ -18,7 +18,7 @@ namespace RestaurantManagementSystem.Application.Dishes.Commands.ChangeDishVisib
         }
         public async Task Handle(ChangeDishVisibilityCommand request, CancellationToken cancellationToken)
         {
-            await _dishRepository.ChangeVisibility(request.DishId);
+            await _dishRepository.ChangeVisibility(request.DishId,request.Visibility);
         }
     }
 }

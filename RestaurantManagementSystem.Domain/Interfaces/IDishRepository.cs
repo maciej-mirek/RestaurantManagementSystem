@@ -12,7 +12,7 @@ namespace RestaurantManagementSystem.Domain.Interfaces
         List<Dish> GetDishes();
         List<Dish> GetVisibleDishes();
         Task CreateDish(Dish dish);
-        Task ChangeVisibility(int dishId);
+        Task ChangeVisibility(int dishId, bool visibility);
         Task Archive(int dishId);
     }
 }

@@ -28,7 +28,7 @@ namespace RestaurantManagementSystem.Infrastructure.DbContext
 
             builder.Entity<OrderDishes>()
                 .HasOne(od => od.Order)
-                .WithMany(o => o.OrderDishes)
+                .WithMany(o => o.Dishes)
                 .HasForeignKey(od => od.OrderId);
 
             builder.Entity<OrderDishes>()

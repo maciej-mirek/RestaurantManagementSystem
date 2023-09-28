@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.11" />
+    <Compile Remove="Entities\Authentication\**" />
+    <EmbeddedResource Remove="Entities\Authentication\**" />
+    <None Remove="Entities\Authentication\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Authentication\" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.11" />
   </ItemGroup>
 
 </Project>

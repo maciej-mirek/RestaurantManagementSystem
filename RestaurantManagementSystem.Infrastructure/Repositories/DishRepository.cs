@@ -44,13 +44,14 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task ChangeVisibility(int dishId)
+        public async Task ChangeVisibility(int dishId, bool visibility)
         {
             var dish = _dbContext.Dishes.FirstOrDefault(d => d.DishId == dishId);
             if (dish is null)
                 throw new NotFoundException("Dish not found");
 
-            dish.IsVisible = dish.IsVisible == true ? false : true;
+            dish.IsVisible = visibility;
+
             _dbContext.Dishes.Update(dish);
             await _dbContext.SaveChangesAsync();
         }
