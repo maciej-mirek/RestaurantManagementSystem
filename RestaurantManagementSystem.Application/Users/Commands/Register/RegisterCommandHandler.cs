@@ -12,9 +12,9 @@ namespace RestaurantManagementSystem.Application.Users.Command.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthResult>
     {
         private readonly IJwtProvider _jwtProvider;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser<int>> _userManager;
 
-        public RegisterCommandHandler(IJwtProvider jwtProvider, UserManager<IdentityUser> userManager)
+        public RegisterCommandHandler(IJwtProvider jwtProvider, UserManager<IdentityUser<int>> userManager)
         {
             _jwtProvider = jwtProvider;
             _userManager = userManager;
@@ -33,7 +33,7 @@ namespace RestaurantManagementSystem.Application.Users.Command.Register
                         Errors = new List<string> { "Account with this email already exists." }
                     };
             }
-            var newUser = new IdentityUser()
+            var newUser = new IdentityUser<int>()
             {
                 Email = request.Email,
                 UserName = request.Email,

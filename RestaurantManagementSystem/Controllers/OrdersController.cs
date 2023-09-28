@@ -3,6 +3,7 @@ using RestaurantManagementSystem.Application.Users.Command.Login;
 using RestaurantManagementSystem.Application.Users;
 using MediatR;
 using RestaurantManagementSystem.Application.Orders.Commands.CreateOrder;
+using RestaurantManagementSystem.Application.Orders.Queries.GetUserOrders;
 
 namespace RestaurantManagementSystem.WebAPI.Controllers
 {
@@ -22,6 +23,12 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
         {
             await _mediator.Send(order);
             return Ok();
+        }
+
+        [HttpGet("GetUserOrders/{userId}")]
+        public async Task<IActionResult> GetUserOrders(int userId)
+        {
+            return Ok(await _mediator.Send(new GetUserOrdersQuery { UserId = userId }));
         }
     }
 }

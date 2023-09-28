@@ -19,7 +19,7 @@ namespace RestaurantManagementSystem.Application.Extensions
                 configuration.RegisterServicesFromAssemblies(assembly));
 
             services.AddScoped(provider => new MapperConfiguration(cfg =>
-            cfg.AddProfile(new DishMappingProfile())).CreateMapper());
+            cfg.AddProfile(new MappingProfile())).CreateMapper());
         }
     }
 }

@@ -26,7 +26,9 @@ namespace RestaurantManagementSystem.Infrastructure.Extensions
             var configuration = builder.Configuration;
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("RestaurantManagementSystem")));
-            services.AddIdentityCore<IdentityUser>()
+            services.AddIdentityCore<IdentityUser<int>>()
+                .AddRoles<IdentityRole<int>>()
+                .AddRoleManager<RoleManager<IdentityRole<int>>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IJwtProvider, JwtProvider>();
@@ -35,6 +37,7 @@ namespace RestaurantManagementSystem.Infrastructure.Extensions
 
             services.AddScoped<IDishRepository,DishRepository>();
             services.AddScoped<IOrderRepository,OrderRepository>();
+            services.AddScoped<IOrderStatusesRepository,OrderStatusesRepository>();
 
 
 

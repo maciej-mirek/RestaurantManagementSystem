@@ -13,9 +13,11 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
     public class OrderRepository : IOrderRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        public OrderRepository(ApplicationDbContext dbContext)
+        private readonly IOrderStatusesRepository _orderStatusesRepository;
+        public OrderRepository(ApplicationDbContext dbContext, IOrderStatusesRepository orderStatusesRepository)
         {
-            _dbContext= dbContext;
+            _dbContext = dbContext;
+            _orderStatusesRepository = orderStatusesRepository;
         }
 
         public async Task Create(Order order)
@@ -30,9 +32,12 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
 
             _dbContext.Orders.Add(order);
             await _dbContext.SaveChangesAsync();
+            await _orderStatusesRepository.ChangeStatus(order.OrderId, StatusEnum.New, null);
+
         }
 
-        public List<Order> GetActive() => _dbContext.Orders
+        public List<Order> GetUserOrders(int userId) => _dbContext.Orders
+            .Where(o => o.User.Id == userId)
             .Include(o => o.Dishes)
             .ThenInclude(o => o.Dish).ToList();
     }

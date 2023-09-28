@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagementSystem.Infrastructure.DbContext
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -19,6 +19,7 @@ namespace RestaurantManagementSystem.Infrastructure.DbContext
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDishes> OrderDishes { get; set; }
         public DbSet<Address> Addresses{ get; set; }
+        public DbSet<OrderStatus> OrderStatuses{ get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

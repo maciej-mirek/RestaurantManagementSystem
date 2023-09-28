@@ -48,7 +48,6 @@ namespace RestaurantManagementSystem.Infrastructure.Seeders
                         PhoneNumber = "987654321"
                     };
 
-
                     var order = new Order
                     {
                         IsPaid = true,
@@ -58,7 +57,6 @@ namespace RestaurantManagementSystem.Infrastructure.Seeders
                         DeliveryType = DeliveryTypeEnum.ToAdress,
                         PaymentType = PaymentTypeEnum.Online,
                         Address = address,
-                      //  Dishes = new List<Dish> { dish1, dish2 }
                     };
 
                     var order2 = new Order
@@ -71,7 +69,6 @@ namespace RestaurantManagementSystem.Infrastructure.Seeders
                         PaymentType = PaymentTypeEnum.OnDelivery,
                         TableNumber = 1,
                         Address = address2,
-                       // Dishes = new List<Dish> { dish1, dish3 }
                     };
 
                     var orderDishes1 = new OrderDishes { OrderId = 1, Order = order, DishId = 1, Dish = dish1, Quantity = 2 };
@@ -79,8 +76,12 @@ namespace RestaurantManagementSystem.Infrastructure.Seeders
                     var orderDishes3 = new OrderDishes { OrderId = 2, Order = order2, DishId = 1, Dish = dish1, Quantity = 3 };
                     var orderDishes4 = new OrderDishes { OrderId = 2, Order = order2, DishId = 3, Dish = dish3, Quantity = 1 };
 
+                    var orderStatus1 = new OrderStatus { Active= true, Status = StatusEnum.New, Order = order, Time = DateTime.UtcNow };
+                    var orderStatus2 = new OrderStatus { Active= true, Status = StatusEnum.New, Order = order2, Time = DateTime.UtcNow };
+
                     await _dbContext.Orders.AddRangeAsync(order, order2);
                     await _dbContext.OrderDishes.AddRangeAsync(orderDishes1, orderDishes2, orderDishes3, orderDishes4);
+                    await _dbContext.OrderStatuses.AddRangeAsync(orderStatus1, orderStatus2);
 
                     await _dbContext.SaveChangesAsync();
                 }

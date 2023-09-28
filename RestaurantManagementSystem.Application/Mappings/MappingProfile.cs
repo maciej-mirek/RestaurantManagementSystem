@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagementSystem.Application.Mappings
 {
-    public class DishMappingProfile : Profile
+    public class MappingProfile : Profile
     {
-        public DishMappingProfile()
+        public MappingProfile()
         {
             CreateMap<DishDto, Dish>();
 

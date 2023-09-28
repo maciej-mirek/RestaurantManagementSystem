@@ -20,7 +20,7 @@ namespace RestaurantManagementSystem.Domain.Entities
         public PaymentTypeEnum PaymentType { get; set; }
         public int? TableNumber { get; set; }
         public string? AdditionalInfo { get; set; }
-        public IdentityUser? User { get; set; }
+        public IdentityUser<int>? User { get; set; }
         public Address? Address { get; set; }
         public List<OrderDishes> Dishes { get; set; }
     }

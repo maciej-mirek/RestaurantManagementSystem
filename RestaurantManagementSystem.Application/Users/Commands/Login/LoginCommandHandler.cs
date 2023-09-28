@@ -14,16 +14,15 @@ namespace RestaurantManagementSystem.Application.Users.Command.Login
     public class LoginCommandHandler : IRequestHandler<LoginCommand, AuthResult>
     {
         private readonly IJwtProvider _jwtProvider;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser<int>> _userManager;
 
-        public LoginCommandHandler(IJwtProvider jwtProvider, UserManager<IdentityUser> userManager)
+        public LoginCommandHandler(IJwtProvider jwtProvider, UserManager<IdentityUser<int>> userManager)
         {
             _jwtProvider = jwtProvider;
             _userManager = userManager;
         }
         public async Task<AuthResult> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            throw new NotFoundException("a");
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
 
             if (existingUser is null)

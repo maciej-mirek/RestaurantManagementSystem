@@ -19,7 +19,7 @@ namespace RestaurantManagementSystem.Infrastructure.Authentication
         {
             _configuration = configuration;
         }
-        public async Task<string> GenerateJwtToken(IdentityUser user)
+        public async Task<string> GenerateJwtToken(IdentityUser<int> user)
         {
 
             List<Claim> claims = new List<Claim>

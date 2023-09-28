@@ -22,7 +22,7 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegistrationRequest request)
         {
             return Ok(await _mediator.Send(new RegisterCommand() { Email = request.Email, Password = request.Password }));

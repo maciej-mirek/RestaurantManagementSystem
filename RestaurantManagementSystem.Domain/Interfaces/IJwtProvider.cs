@@ -9,6 +9,6 @@ namespace RestaurantManagementSystem.Domain.Interfaces
 {
     public interface IJwtProvider
     {
-        Task<string> GenerateJwtToken(IdentityUser user);
+        Task<string> GenerateJwtToken(IdentityUser<int> user);
     }
 }
