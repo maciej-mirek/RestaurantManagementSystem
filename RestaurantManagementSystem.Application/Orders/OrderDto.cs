@@ -18,7 +18,7 @@ namespace RestaurantManagementSystem.Application.Orders
         public PaymentTypeEnum PaymentType { get; set; }
         public int? TableNumber { get; set; }
         public string? AdditionalInfo { get; set; }
-        public IdentityUser? User { get; set; }
+        public int? UserId { get; set; }
         public Address? Address { get; set; }
         public List<OrderDishesDto> Dishes { get; set; }
     }

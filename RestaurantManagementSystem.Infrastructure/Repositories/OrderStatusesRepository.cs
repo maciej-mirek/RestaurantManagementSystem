@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantManagementSystem.Application.Exceptions;
 using RestaurantManagementSystem.Domain.Entities;
+using RestaurantManagementSystem.Domain.Exceptions;
 using RestaurantManagementSystem.Domain.Interfaces;
 using RestaurantManagementSystem.Infrastructure.DbContext;
 using System;

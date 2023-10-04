@@ -21,10 +21,9 @@ namespace RestaurantManagementSystem.Application.Orders.Commands.CreateOrder
         }
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            
+
             var order = _mapper.Map<Order>(request);
             await _orderRepository.Create(order);
-
         }
     }
 }

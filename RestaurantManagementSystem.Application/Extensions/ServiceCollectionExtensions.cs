@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using RestaurantManagementSystem.Application.Dishes.Commands.ChangeDishVisibility;
+using RestaurantManagementSystem.Application.Dishes.Commands.CreateDish;
 using RestaurantManagementSystem.Application.Mappings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RestaurantManagementSystem.Application.Orders.Commands.CreateOrder;
 
 namespace RestaurantManagementSystem.Application.Extensions
 {
@@ -17,6 +16,11 @@ namespace RestaurantManagementSystem.Application.Extensions
             var assembly = typeof(ServiceCollectionExtensions).Assembly;
             services.AddMediatR(configuration =>
                 configuration.RegisterServicesFromAssemblies(assembly));
+
+            services
+                .AddValidatorsFromAssemblyContaining<CreateDishCommandValidator>()
+               .AddFluentValidationAutoValidation()
+               .AddFluentValidationClientsideAdapters();
 
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             cfg.AddProfile(new MappingProfile())).CreateMapper());

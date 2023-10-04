@@ -25,6 +25,8 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
 
             foreach(var d in order.Dishes)
             {
+                if(d.Quantity == 0)
+                    throw new Exception();
                 var dish = await _dbContext.Dishes.FindAsync(d.DishId);
                 if (dish is null)
                     throw new Exception();

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using RestaurantManagementSystem.Application.Exceptions;
+using RestaurantManagementSystem.Domain.Exceptions;
 using RestaurantManagementSystem.Application.Users;
 using RestaurantManagementSystem.Domain.Interfaces;
 using System;

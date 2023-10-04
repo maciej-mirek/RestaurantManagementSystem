@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantManagementSystem.Application.Dishes;
 using RestaurantManagementSystem.Application.Dishes.Commands.CreateDish;
 using RestaurantManagementSystem.Application.Dishes.Queries;
-using RestaurantManagementSystem.Application.Exceptions;
 using RestaurantManagementSystem.Application.Users;
 using RestaurantManagementSystem.Application.Users.Command.Login;
 using RestaurantManagementSystem.Application.Users.Command.Register;

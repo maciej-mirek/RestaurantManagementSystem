@@ -21,8 +21,8 @@ namespace RestaurantManagementSystem.Application.Dishes.Commands.CreateDish
             _mapper = mapper;
         }
         public async Task Handle(CreateDishCommand request, CancellationToken cancellationToken)
-        {
-            var dish = _mapper.Map<Dish>(request);
+        {   
+            var dish = _mapper.Map<Domain.Entities.Dish>(request);
             await _dishRepository.CreateDish(dish);
         }
     }

@@ -1,6 +1,7 @@
 ﻿
 
-using RestaurantManagementSystem.Application.Exceptions;
+
+using RestaurantManagementSystem.Domain.Exceptions;
 
 namespace RestaurantManagementSystem.WebAPI.Middleware
 {

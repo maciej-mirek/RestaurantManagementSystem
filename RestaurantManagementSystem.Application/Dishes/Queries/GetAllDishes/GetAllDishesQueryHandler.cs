@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RestaurantManagementSystem.Application.Exceptions;
+using RestaurantManagementSystem.Domain.Exceptions;
 using RestaurantManagementSystem.Domain.Entities;
 using RestaurantManagementSystem.Domain.Interfaces;
 using System;

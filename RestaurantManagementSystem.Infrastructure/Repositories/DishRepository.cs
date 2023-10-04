@@ -1,5 +1,5 @@
-﻿using RestaurantManagementSystem.Application.Exceptions;
-using RestaurantManagementSystem.Domain.Entities;
+﻿using RestaurantManagementSystem.Domain.Entities;
+using RestaurantManagementSystem.Domain.Exceptions;
 using RestaurantManagementSystem.Domain.Interfaces;
 using RestaurantManagementSystem.Infrastructure.DbContext;
 using System;
@@ -20,7 +20,7 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
         public List<Dish> GetDishes() => _dbContext.Dishes.ToList();
         public List<Dish> GetVisibleDishes() => _dbContext.Dishes.Where(d=> d.IsVisible).ToList();
         public async Task CreateDish(Dish dish)
-        {
+        {     
             Dish newDish = new Dish
             {
                 Name = dish.Name,
