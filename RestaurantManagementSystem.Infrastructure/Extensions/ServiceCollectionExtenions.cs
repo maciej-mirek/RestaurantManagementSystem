@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using RestaurantManagementSystem.Application.Config;
 using RestaurantManagementSystem.Domain.Interfaces;
 using RestaurantManagementSystem.Infrastructure.Authentication;
 using RestaurantManagementSystem.Infrastructure.DbContext;
 using RestaurantManagementSystem.Infrastructure.Repositories;
 using RestaurantManagementSystem.Infrastructure.Seeders;
+using RestaurantManagementSystem.Infrastructure.Services.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,18 +26,42 @@ namespace RestaurantManagementSystem.Infrastructure.Extensions
             var configuration = builder.Configuration;
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("RestaurantManagementSystem")));
+
             services.AddIdentityCore<IdentityUser<int>>()
                 .AddRoles<IdentityRole<int>>()
                 .AddRoleManager<RoleManager<IdentityRole<int>>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddScoped<IJwtProvider, JwtProvider>();
-            services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
-            services.AddScoped<RestaurantManagementSystemSeeder>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+              .AddJwtBearer(jwt =>
+              {
+                  var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
+                  jwt.SaveToken = true;
+                  jwt.TokenValidationParameters = new TokenValidationParameters()
+                  {
+                      ValidateIssuerSigningKey = true,
+                      IssuerSigningKey = new SymmetricSecurityKey(key),
+                      ValidateIssuer = false,
+                      ValidateAudience = false,
+                      RequireExpirationTime = false,
+                      ValidateLifetime = true
+                  };
+              });
 
-            services.AddScoped<IDishRepository,DishRepository>();
-            services.AddScoped<IOrderRepository,OrderRepository>();
-            services.AddScoped<IOrderStatusesRepository,OrderStatusesRepository>();
+
+            services
+                .AddScoped<IJwtProvider, JwtProvider>()
+                .AddScoped<RestaurantManagementSystemSeeder>()
+                .AddScoped<IDishRepository, DishRepository>()
+                .AddScoped<IOrderRepository, OrderRepository>()
+                .AddScoped<IOrderStatusesRepository, OrderStatusesRepository>()
+                .AddScoped<IEmailService, EmailService>()
+                .AddScoped<IEmailTemplateGenerator, EmailTemplateGenerator>();
 
 
 

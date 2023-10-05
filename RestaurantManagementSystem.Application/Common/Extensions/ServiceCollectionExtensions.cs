@@ -2,12 +2,10 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using RestaurantManagementSystem.Application.Dishes.Commands.ChangeDishVisibility;
+using RestaurantManagementSystem.Application.Common.Mappings;
 using RestaurantManagementSystem.Application.Dishes.Commands.CreateDish;
-using RestaurantManagementSystem.Application.Mappings;
-using RestaurantManagementSystem.Application.Orders.Commands.CreateOrder;
 
-namespace RestaurantManagementSystem.Application.Extensions
+namespace RestaurantManagementSystem.Application.Common.Extensions
 {
     public static class ServiceCollectionExtensions
     {

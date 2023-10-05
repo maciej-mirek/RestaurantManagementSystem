@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantManagementSystem.Application.Mappings
+namespace RestaurantManagementSystem.Application.Common.Mappings
 {
     public class MappingProfile : Profile
     {
@@ -31,6 +31,6 @@ namespace RestaurantManagementSystem.Application.Mappings
                 .ForMember(dest => dest.Order, opt => opt.Ignore())
                 .ForMember(dest => dest.Dish, opt => opt.Ignore());
         }
-        
+
     }
 }

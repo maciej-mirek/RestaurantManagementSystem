@@ -1,7 +1,7 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using RestaurantManagementSystem.Application.Extensions;
+using RestaurantManagementSystem.Application.Common.Extensions;
 using RestaurantManagementSystem.Infrastructure.Extensions;
 using RestaurantManagementSystem.Infrastructure.Seeders;
 using RestaurantManagementSystem.WebAPI.Middleware;
@@ -30,26 +30,7 @@ namespace RestaurantManagementSystem
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             });
 
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-           .AddJwtBearer(jwt =>
-           {
-               var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
-               jwt.SaveToken = true;
-               jwt.TokenValidationParameters = new TokenValidationParameters()
-               {
-                   ValidateIssuerSigningKey = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(key),
-                   ValidateIssuer = false,
-                   ValidateAudience = false,
-                   RequireExpirationTime = false,
-                   ValidateLifetime = true
-               };
-           });
+           
 
             builder.Host.UseSerilog((context, configuration) =>
                 configuration.ReadFrom.Configuration(context.Configuration));
