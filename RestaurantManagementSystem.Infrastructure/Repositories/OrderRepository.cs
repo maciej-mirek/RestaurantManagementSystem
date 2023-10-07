@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using RestaurantManagementSystem.Domain;
+using RestaurantManagementSystem.Domain.DomainEvents;
 using RestaurantManagementSystem.Domain.Entities;
 using RestaurantManagementSystem.Domain.Interfaces;
 using RestaurantManagementSystem.Infrastructure.DbContext;
@@ -13,11 +16,11 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
     public class OrderRepository : IOrderRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly IOrderStatusesRepository _orderStatusesRepository;
-        public OrderRepository(ApplicationDbContext dbContext, IOrderStatusesRepository orderStatusesRepository)
+        private readonly IPublisher _publisher;
+        public OrderRepository(ApplicationDbContext dbContext,IPublisher publisher)
         {
             _dbContext = dbContext;
-            _orderStatusesRepository = orderStatusesRepository;
+            _publisher = publisher;
         }
 
         public async Task Create(Order order)
@@ -33,8 +36,10 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
             }
 
             _dbContext.Orders.Add(order);
+
             await _dbContext.SaveChangesAsync();
-            await _orderStatusesRepository.ChangeStatus(order.OrderId, StatusEnum.New, null);
+
+            await _publisher.Publish(new OrderCreatedEvent(order.OrderId,order.User is not null ? order.User.Email : "" ));
 
         }
 
