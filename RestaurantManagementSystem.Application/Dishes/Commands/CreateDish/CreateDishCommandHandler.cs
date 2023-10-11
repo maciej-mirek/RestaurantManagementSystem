@@ -22,7 +22,7 @@ namespace RestaurantManagementSystem.Application.Dishes.Commands.CreateDish
         }
         public async Task Handle(CreateDishCommand request, CancellationToken cancellationToken)
         {   
-            var dish = _mapper.Map<Domain.Entities.Dish>(request);
+            var dish = _mapper.Map<Dish>(request);
             await _dishRepository.CreateDish(dish);
         }
     }

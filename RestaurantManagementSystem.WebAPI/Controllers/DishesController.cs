@@ -31,7 +31,7 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
             return Ok(await _mediator.Send(new GetAllDishesVisibleQuery()));
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<IActionResult> Create(CreateDishCommand dishDto)
         {
             await _mediator.Send(dishDto);
@@ -46,9 +46,9 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
         }
 
         [HttpPatch("Archive")]
-        public async Task<IActionResult> Archive(int dishId)
+        public async Task<IActionResult> Archive(ArchiveDishCommand command)
         {
-            await _mediator.Send(new ArchiveDishCommand{DishId = dishId});
+            await _mediator.Send(new ArchiveDishCommand{DishId = command.DishId});
             return Ok();
         }
     }

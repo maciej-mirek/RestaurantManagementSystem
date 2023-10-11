@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestaurantManagementSystem.Application.Users.Command.Login;
 using RestaurantManagementSystem.Application.Users;
 using MediatR;
 using RestaurantManagementSystem.Application.Orders.Commands.CreateOrder;
@@ -21,8 +20,19 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create(CreateOrderCommand order)
         {
-            await _mediator.Send(order);
-            return Ok();
+            var createdOrder = await _mediator.Send(order);
+            if (createdOrder is not null)
+            {
+                var orderCreatedResponse = new
+                {
+                    Status = "success",
+                    createdOrder.OrderId
+                };
+
+                return Created("", orderCreatedResponse);
+            }
+            return BadRequest();
+
         }
 
         [HttpGet("GetUserOrders/{userId}")]

@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace RestaurantManagementSystem.Application.Orders.Commands.CreateOrder
 {
-    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
+    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Order>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, IMediator mediator)
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
-        public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var order = _mapper.Map<Order>(request);
-            await _orderRepository.Create(order);
+            return await _orderRepository.Create(order);
         }
     }
 }

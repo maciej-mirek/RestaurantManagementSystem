@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace RestaurantManagementSystem.Application.Users.Command.Login
+namespace RestaurantManagementSystem.Application.Users.Commands.Login
 {
-    public class LoginCommand : UserLoginRequest,IRequest<AuthResult>
+    public class LoginCommand : UserLoginRequest, IRequest<AuthResult>
     {
     }
 }

@@ -10,6 +10,6 @@ namespace RestaurantManagementSystem.Domain.Interfaces
     public interface IOrderRepository
     {
         List<Order> GetUserOrders(int userId);
-        Task Create(Order order);
+        Task<Order> Create(Order order);
     }
 }

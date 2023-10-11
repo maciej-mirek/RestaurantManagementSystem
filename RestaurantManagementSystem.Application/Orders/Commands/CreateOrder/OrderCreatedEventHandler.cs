@@ -28,7 +28,7 @@ namespace RestaurantManagementSystem.Application.Orders.Commands.CreateOrder
             await _orderStatusesRepository.ChangeStatus(notification.OrderId, StatusEnum.New, null);
 
             var body = _emailTemplateGenerator.OrderConfirmationEmail(new Order());
-            _emailService.SendEmail("",$"Order {notification.OrderId} confirmation.",body);
+            //_emailService.SendEmail("",$"Order {notification.OrderId} confirmation.",body);
         }
     }
 }

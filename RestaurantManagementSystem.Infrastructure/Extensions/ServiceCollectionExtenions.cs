@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RestaurantManagementSystem.Domain.Interfaces;
 using RestaurantManagementSystem.Infrastructure.Authentication;
-using RestaurantManagementSystem.Infrastructure.DbContext;
+using RestaurantManagementSystem.Infrastructure.DatabaseContext;
 using RestaurantManagementSystem.Infrastructure.Repositories;
 using RestaurantManagementSystem.Infrastructure.Seeders;
 using RestaurantManagementSystem.Infrastructure.Services.Email;

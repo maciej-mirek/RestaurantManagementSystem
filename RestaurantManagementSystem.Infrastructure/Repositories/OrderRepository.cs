@@ -4,7 +4,7 @@ using RestaurantManagementSystem.Domain;
 using RestaurantManagementSystem.Domain.DomainEvents;
 using RestaurantManagementSystem.Domain.Entities;
 using RestaurantManagementSystem.Domain.Interfaces;
-using RestaurantManagementSystem.Infrastructure.DbContext;
+using RestaurantManagementSystem.Infrastructure.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
             _publisher = publisher;
         }
 
-        public async Task Create(Order order)
+        public async Task<Order> Create(Order order)
         {
 
             foreach(var d in order.Dishes)
@@ -41,6 +41,7 @@ namespace RestaurantManagementSystem.Infrastructure.Repositories
 
             await _publisher.Publish(new OrderCreatedEvent(order.OrderId,order.User is not null ? order.User.Email : "" ));
 
+            return order;
         }
 
         public List<Order> GetUserOrders(int userId) => _dbContext.Orders

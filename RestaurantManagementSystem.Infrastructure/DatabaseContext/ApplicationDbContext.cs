@@ -9,17 +9,17 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestaurantManagementSystem.Infrastructure.DbContext
+namespace RestaurantManagementSystem.Infrastructure.DatabaseContext
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>,IdentityRole<int>,int>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDishes> OrderDishes { get; set; }
-        public DbSet<Address> Addresses{ get; set; }
-        public DbSet<OrderStatus> OrderStatuses{ get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -37,22 +37,6 @@ namespace RestaurantManagementSystem.Infrastructure.DbContext
                 .WithMany(d => d.OrderDishes)
                 .HasForeignKey(od => od.DishId);
 
-
-            //builder.Entity<Order>()
-            //    .HasMany(o => o.Dishes);
-
-            //builder.Entity<OrderDishes>()
-            //    .HasKey(od => od.OrderDishesId);
-
-            //builder.Entity<OrderDishes>()
-            //    .HasOne(od => od.Order)
-            //    .WithMany()
-            //    .HasForeignKey(od => od.OrderId);
-
-            //builder.Entity<OrderDishes>()
-            //    .HasOne(od => od.Dish)
-            //    .WithMany()
-            //    .HasForeignKey(od => od.DishId);
 
         }
     }

@@ -1,7 +1,7 @@
 ﻿using RestaurantManagementSystem.Domain.Entities;
 using RestaurantManagementSystem.Domain.Exceptions;
 using RestaurantManagementSystem.Domain.Interfaces;
-using RestaurantManagementSystem.Infrastructure.DbContext;
+using RestaurantManagementSystem.Infrastructure.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;

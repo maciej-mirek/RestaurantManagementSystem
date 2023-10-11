@@ -23,6 +23,7 @@ namespace RestaurantManagementSystem
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddScoped<ExceptionsMiddleware>();
+            //builder.Services.AddScoped<RequestLoggingMiddleware>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddControllers().AddJsonOptions(options =>
@@ -38,6 +39,7 @@ namespace RestaurantManagementSystem
             var app = builder.Build();
 
             app.UseMiddleware<ExceptionsMiddleware>();
+            //app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseSerilogRequestLogging();
 
 

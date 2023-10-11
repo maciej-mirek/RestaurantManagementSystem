@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RestaurantManagementSystem.Application.Dishes;
-using RestaurantManagementSystem.Application.Dishes.Commands.CreateDish;
-using RestaurantManagementSystem.Application.Dishes.Queries;
 using RestaurantManagementSystem.Application.Users;
-using RestaurantManagementSystem.Application.Users.Command.Login;
-using RestaurantManagementSystem.Application.Users.Command.Register;
-using RestaurantManagementSystem.Domain.Interfaces;
+using RestaurantManagementSystem.Application.Users.Commands.Login;
+using RestaurantManagementSystem.Application.Users.Commands.Register;
 
 namespace RestaurantManagementSystem.WebAPI.Controllers
 {
@@ -24,13 +19,15 @@ namespace RestaurantManagementSystem.WebAPI.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegistrationRequest request)
         {
-            return Ok(await _mediator.Send(new RegisterCommand() { Email = request.Email, Password = request.Password }));
+            var result = await _mediator.Send(new RegisterCommand() { Email = request.Email, Password = request.Password });
+            return result.Result ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(UserLoginRequest request)
         {
-            return Ok(await _mediator.Send(new LoginCommand() { Email = request.Email, Password = request.Password}));
+            var result = await _mediator.Send(new LoginCommand() { Email = request.Email, Password = request.Password });
+            return result.Result ? Ok(result) : BadRequest(result);
         }
 
     }
